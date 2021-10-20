@@ -1,11 +1,15 @@
 import AppWrapper from 'components/AppWrapper';
 import CarsPage from 'pages/Cars';
+import { Provider as StoreProvider } from 'react-redux';
+import store from 'store';
 
-const App = (props) => {
+const App = () => {
   return (
-    <AppWrapper>
-      <CarsPage />
-    </AppWrapper>
+    <StoreProvider store={store}>
+      <AppWrapper>
+        <CarsPage />
+      </AppWrapper>
+    </StoreProvider>
   );
 };
 
