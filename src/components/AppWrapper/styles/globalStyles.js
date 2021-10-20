@@ -42,11 +42,17 @@ const GlobalStyles = createGlobalStyle`
 }
 }
 
+* {
+  box-sizing: border-box;
+}
+
 body {
     margin: 0;
     padding:0;
     font-family:'CircularStdBook';
     color: var(--clr-grey-bckgd);
+    background: #673ab7;
+  background: linear-gradient(to right, #512da8, #673ab7);
   }
   .page{
     margin-top:100px;

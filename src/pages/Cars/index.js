@@ -1,22 +1,24 @@
+import styled from 'styled-components';
 import { compose } from 'recompose';
 import CarsContainer from 'containers/Cars';
 import React from 'react';
 
+import PageHeader from 'parts/PageHeader';
+
+const CarsPageWrapper = styled.div``;
+
 const CarsPage = (props) => {
-
-
   const { getMakesRequest, makes } = props;
 
   React.useEffect(() => {
-    getMakesRequest();
+    !makes && getMakesRequest();
   }, []);
 
-  // React.useEffect(() => {
-  //   console.log('makes');
-  //   console.log(makes);
-  // }, [makes]);
-
-  return <div>cars</div>;
+  return (
+    <CarsPageWrapper>
+      <PageHeader title="Cars" />
+    </CarsPageWrapper>
+  );
 };
 
 export default compose(CarsContainer)(CarsPage);

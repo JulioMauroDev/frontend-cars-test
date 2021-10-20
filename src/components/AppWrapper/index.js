@@ -7,7 +7,7 @@ const AppLayoutWrapper = styled.div`
   max-width: 100%;
   padding: 0;
   margin: 0;
-  background-color: var(--clr-grey-bckgd);
+  /* background-color: var(--clr-grey-bckgd); */
 `;
 
 const AppWrapper = (props) => {
