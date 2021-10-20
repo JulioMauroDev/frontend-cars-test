@@ -1,35 +1,45 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Field } from 'redux-form';
+import { Field, change } from 'redux-form';
+import TextInput from 'components/TextInput';
+import Dropdown from 'components/Dropdown';
 
 const AddCarFormWrapper = styled.form``;
 
-const renderField = (field) => (
-  <div className="input-row">
-    <input {...field.input} type="text" />
-    {field.meta.touched && field.meta.error && (
-      <span className="error">{field.meta.error}</span>
-    )}
-  </div>
-);
-
 const AddCarForm = (props) => {
-  const { handleSubmit } = props;
+  const { handleSubmit, makes, addCarFormValues } = props;
 
+  const [isFormValid, setIsFormValid] = React.useState(false);
+
+  React.useEffect(() => {
+    addCarFormValues['make']?.length > 0 &&
+    addCarFormValues['model']?.length > 0 &&
+    addCarFormValues['colour']?.length > 0 &&
+    addCarFormValues['year']?.length > 0
+      ? setIsFormValid(true)
+      : setIsFormValid(false);
+  }, [addCarFormValues]);
+
+  const handleMakeSelect = (make) => {
+    change('make', make);
+  };
+
+  console.log(props);
   return (
     <AddCarFormWrapper onSubmit={handleSubmit}>
       <Field
         name="make"
-        component={renderField}
+        component={Dropdown}
+        onChange={handleMakeSelect}
         props={{
           placeholder: 'Car make...',
           withValidationIcon: true,
-          // validation: makeValidation,
+          values: makes,
         }}
       />
       <Field
         name="model"
-        component={renderField}
+        component={TextInput}
         props={{
           placeholder: 'Car model...',
           withValidationIcon: true,
@@ -38,7 +48,7 @@ const AddCarForm = (props) => {
       />
       <Field
         name="colour"
-        component={renderField}
+        component={TextInput}
         props={{
           placeholder: 'Car colour...',
           withValidationIcon: true,
@@ -47,7 +57,7 @@ const AddCarForm = (props) => {
       />
       <Field
         name="year"
-        component={renderField}
+        component={TextInput}
         props={{
           placeholder: 'Car Year...',
           withValidationIcon: true,
@@ -55,7 +65,9 @@ const AddCarForm = (props) => {
         }}
       />
 
-      <button type="submit">Submit</button>
+      <button disabled={!isFormValid} type="submit">
+        Submit
+      </button>
     </AddCarFormWrapper>
   );
 };

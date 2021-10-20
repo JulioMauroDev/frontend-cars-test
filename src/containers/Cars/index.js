@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
+import { formValueSelector } from 'redux-form';
 
 import {
   getCarsRequest,
@@ -23,6 +24,8 @@ export const mapStateToProps = createStructuredSelector({
   errorMessage: selectErrorMessage,
   makes: selectMakes,
   cars: selectCars,
+  addCarFormValues: (state) =>
+    formValueSelector('ADD_CAR_FORM')(state, 'make', 'model', 'colour', 'year'),
 });
 
 export const mapDispatchToProps = (dispatch) =>
