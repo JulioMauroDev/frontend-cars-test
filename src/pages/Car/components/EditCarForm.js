@@ -64,7 +64,7 @@ const EditCarForm = (props) => {
         name="model"
         component={TextInput}
         props={{
-          placeholder: carDefaultValues['model'],
+          placeholder: carDefaultValues?.model,
           withValidationIcon: true,
           // validation: modelValidation,
         }}
@@ -73,7 +73,7 @@ const EditCarForm = (props) => {
         name="colour"
         component={TextInput}
         props={{
-          placeholder: carDefaultValues['colour'],
+          placeholder: carDefaultValues?.colour,
           withValidationIcon: true,
           // validation: colourValidation,
         }}
@@ -82,7 +82,7 @@ const EditCarForm = (props) => {
         name="year"
         component={TextInput}
         props={{
-          placeholder: carDefaultValues['year'],
+          placeholder: carDefaultValues?.year,
           withValidationIcon: true,
           // validation: yearValidation,
         }}

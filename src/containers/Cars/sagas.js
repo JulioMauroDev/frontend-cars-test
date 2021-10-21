@@ -1,7 +1,9 @@
-import { takeLatest, call, put } from 'redux-saga/effects';
+import { takeLatest, call, put, select } from 'redux-saga/effects';
 import { v4 } from 'node-uuid';
 import { apiGetMakes } from './api';
-import { push } from 'connected-react-router'
+import { push } from 'connected-react-router';
+import store from 'store';
+import { selectCars } from './selectors';
 
 import {
   GET_CARS_REQUEST,
@@ -38,11 +40,46 @@ function* addCarWorker(action) {
 
     yield put(addCarSuccess(action.payload));
 
-    yield put(push('/cars'))
+    yield put(push('/cars'));
   } catch (error) {
     console.log(error);
     // const errorMessage = yield error.toJSON().message;
     yield put(addCarFailure(error));
+  }
+}
+
+function* editCarWorker(action) {
+  try {
+    const selectedCarId = action.payload.cardId;
+
+    const carsSelector = yield select(selectCars);
+
+    const currentCarIndex = carsSelector
+      .map((car, index) => {
+        if (car.id === selectedCarId) {
+          return index;
+        }
+      })
+      .filter((x) => x !== undefined)[0];
+
+    let updatedCars = carsSelector;
+
+    yield (updatedCars[currentCarIndex] = action.payload.values);
+
+    console.log('currentCarIndex');
+    console.log(currentCarIndex);
+    // console.log('carsSelector')
+    // console.log(carsSelector)
+    // console.log('updatedCars')
+    // console.log(updatedCars)
+
+    // yield put(editCarSuccess(updatedCars));
+
+    // yield put(push('/cars'));
+  } catch (error) {
+    console.log(error);
+    // const errorMessage = yield error.toJSON().message;
+    yield put(editCarFailure(error));
   }
 }
 
@@ -71,5 +108,5 @@ export default function* watcher() {
   yield takeLatest(GET_CARS_REQUEST, getCarsWorker);
   yield takeLatest(ADD_CAR_REQUEST, addCarWorker);
   yield takeLatest(GET_MAKES_REQUEST, getMakesWorker);
-  
+  yield takeLatest(EDIT_CAR_REQUEST, editCarWorker);
 }

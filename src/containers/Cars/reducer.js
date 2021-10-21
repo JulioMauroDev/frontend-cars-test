@@ -106,6 +106,33 @@ export default function reducer(state = initialState, action) {
       };
     }
 
+    // ---
+
+    case EDIT_CAR_REQUEST: {
+      return {
+        ...state,
+        loading: true,
+        errorMessage: null,
+      };
+    }
+
+    case EDIT_CAR_FAILURE: {
+      return {
+        ...state,
+        loading: false,
+        errorMessage: action.payload,
+      };
+    }
+
+    case EDIT_CAR_SUCCESS: {
+      return {
+        ...state,
+        loading: false,
+        errorMessage: null,
+        cars: [...state.cars, action.payload],
+      };
+    }
+
     default:
       return state;
   }
