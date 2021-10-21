@@ -53,12 +53,11 @@ export const addCarSuccess = (newCar) => ({
 
 // --- EDIT CAR
 
-export const editCarRequest = (cardId, field, value) => ({
+export const editCarRequest = (cardId, values) => ({
   type: EDIT_CAR_REQUEST,
   payload: {
     cardId,
-    field,
-    value,
+    values,
   },
 });
 

@@ -1,10 +1,9 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from 'react';
+import styled from 'styled-components';
 
-import { useLocation } from 'react-router-dom'
-import { push } from 'connected-react-router'
+import { push } from 'connected-react-router';
 
-import store from 'store'
+import store from 'store';
 
 const TableBodyRowWrapper = styled.tr`
   border: 1px solid red;
@@ -33,38 +32,36 @@ const TableBodyRowWrapper = styled.tr`
   td:last-child {
     border-radius: 0 5px 5px 0;
   }
-`
+`;
 
 const TableBodyItem = styled.td`
-  padding: 0 25px 0 35px;
   font-family: 'CircularStdBook';
-  font-size: 13px;
+  font-size: 12px;
   color: #222222;
-`
+  text-align: center;
+`;
 
 const TableBodyRow = ({ data, margin, itemId }) => {
-  const { pathname } = useLocation()
-  const targetPath = `${pathname}/${itemId}`
+  const targetPath = `edit-car/${itemId}`;
 
   return (
     <TableBodyRowWrapper margin={margin} className="table-body-row">
-      {Object.values(data).map((item, index) => {
-        const formattedString =
-          index === 0 ? item.toString().slice(0, 6) + ' ...' : item.toString()
-
-        return (
-          <TableBodyItem
-            onClick={() => {
-              store.dispatch(push(targetPath))
-            }}
-            key={item}
-          >
-            {formattedString}
-          </TableBodyItem>
-        )
-      })}
+      {Object.values(data)
+        .slice(0, 4)
+        .map((item, index) => {
+          return (
+            <TableBodyItem
+              onClick={() => {
+                store.dispatch(push(targetPath));
+              }}
+              key={item}
+            >
+              {item.toString()}
+            </TableBodyItem>
+          );
+        })}
     </TableBodyRowWrapper>
-  )
-}
+  );
+};
 
-export default TableBodyRow
+export default TableBodyRow;

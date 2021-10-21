@@ -2,45 +2,38 @@ import React from 'react';
 import styled from 'styled-components';
 import { compose } from 'recompose';
 import CarsContainer from 'containers/Cars';
-import AddCarForm from './components/AddCarForm';
 import RedirectButton from 'components/Buttons/RedirectButton';
-
-import { reduxForm } from 'redux-form';
-import { addCarRequest } from 'containers/Cars/actions';
-
 import PageHeader from 'parts/PageHeader';
+import { reduxForm } from 'redux-form';
+import { editCarRequest } from 'containers/Cars/actions';
+import EditCarForm from './components/EditCarForm';
 
-const AddCarPageWrapper = styled.div`
+
+const CarPageWrapper = styled.div`
   width: 95%;
   display: block;
   margin: 0 auto;
   margin-top: 25px;
 `;
 
-const AddCarPage = (props) => {
-  const { getMakesRequest, makes } = props;
-
-  React.useEffect(() => {
-    !makes && getMakesRequest();
-  }, []);
-
+const CarPage = (props) => {
   return (
-    <AddCarPageWrapper>
-      <PageHeader title="Add Car" />
-      <AddCarForm {...props} />
+    <CarPageWrapper>
+      <PageHeader title="Edit Car" />
+      <EditCarForm {...props} />
       <RedirectButton
         title="See Saved Cars"
         redirectTo="/cars"
       ></RedirectButton>
-    </AddCarPageWrapper>
+    </CarPageWrapper>
   );
 };
 
 export default compose(
   reduxForm({
-    form: 'ADD_CAR_FORM',
-    onSubmit: (values) => addCarRequest(values),
+    form: 'EDIT_CAR_FORM',
+    onSubmit: (cardId, values) => editCarRequest(cardId, values),
     submitAsSideEffect: true,
   }),
   CarsContainer
-)(AddCarPage);
+)(CarPage);

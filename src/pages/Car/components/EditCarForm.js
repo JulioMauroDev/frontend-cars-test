@@ -4,7 +4,7 @@ import { Field, change } from 'redux-form';
 import TextInput from 'components/TextInput';
 import Dropdown from 'components/Dropdown';
 
-const AddCarFormWrapper = styled.form`
+const EditCarFormWrapper = styled.form`
   width: 80%;
   display: block;
   /* margin: 0 auto; */
@@ -14,26 +14,42 @@ const AddCarFormWrapper = styled.form`
   }
 `;
 
-const AddCarForm = (props) => {
-  const { handleSubmit, makes, addCarFormValues } = props;
+const EditCarForm = (props) => {
+  const {
+    handleSubmit,
+    makes,
+    editCarFormValues,
+    history,
+    cars,
+    editCarRequest,
+  } = props;
 
   const [isFormValid, setIsFormValid] = React.useState(false);
 
   React.useEffect(() => {
-    addCarFormValues['make']?.length > 0 &&
-    addCarFormValues['model']?.length > 0 &&
-    addCarFormValues['colour']?.length > 0 &&
-    addCarFormValues['year']?.length > 0
+    editCarFormValues['make']?.length > 0 &&
+    editCarFormValues['model']?.length > 0 &&
+    editCarFormValues['colour']?.length > 0 &&
+    editCarFormValues['year']?.length > 0
       ? setIsFormValid(true)
       : setIsFormValid(false);
-  }, [addCarFormValues]);
+  }, [editCarFormValues]);
 
   const handleMakeSelect = (make) => {
     change('make', make);
   };
 
+  const currentCarId = history.location.pathname.replace('/edit-car/', '');
+
+  const carDefaultValues = cars.filter((car) => car.id === currentCarId)[0];
+
+  const handleEdit = (evt) => {
+    evt.preventDefault();
+    editCarRequest(currentCarId, editCarFormValues);
+  };
+
   return (
-    <AddCarFormWrapper onSubmit={handleSubmit}>
+    <EditCarFormWrapper onSubmit={handleEdit}>
       <Field
         name="make"
         component={Dropdown}
@@ -48,7 +64,7 @@ const AddCarForm = (props) => {
         name="model"
         component={TextInput}
         props={{
-          placeholder: 'Car model...',
+          placeholder: carDefaultValues['model'],
           withValidationIcon: true,
           // validation: modelValidation,
         }}
@@ -57,7 +73,7 @@ const AddCarForm = (props) => {
         name="colour"
         component={TextInput}
         props={{
-          placeholder: 'Car colour...',
+          placeholder: carDefaultValues['colour'],
           withValidationIcon: true,
           // validation: colourValidation,
         }}
@@ -66,17 +82,17 @@ const AddCarForm = (props) => {
         name="year"
         component={TextInput}
         props={{
-          placeholder: 'Car Year...',
+          placeholder: carDefaultValues['year'],
           withValidationIcon: true,
           // validation: yearValidation,
         }}
       />
 
       <button disabled={!isFormValid} type="submit">
-        Create new car
+        Update Car
       </button>
-    </AddCarFormWrapper>
+    </EditCarFormWrapper>
   );
 };
 
-export default AddCarForm;
+export default EditCarForm;

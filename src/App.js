@@ -1,5 +1,6 @@
 import AppWrapper from 'components/AppWrapper';
 import CarsPage from 'pages/Cars';
+import CarPage from 'pages/Car';
 import AddCarPage from 'pages/AddCar';
 import { Provider as StoreProvider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
@@ -33,6 +34,11 @@ const App = () => {
               key={`/add-car`}
               path={`/add-car`}
               component={AddCarPage}
+            ></Route>
+            <Route
+              key={`/edit-car`}
+              path={`/edit-car`}
+              component={CarPage}
             ></Route>
           </Switch>
           {/* <CarsPage /> */}

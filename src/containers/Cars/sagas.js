@@ -1,6 +1,7 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
-
+import { v4 } from 'node-uuid';
 import { apiGetMakes } from './api';
+import { push } from 'connected-react-router'
 
 import {
   GET_CARS_REQUEST,
@@ -31,9 +32,15 @@ function* getCarsWorker(action) {
 
 function* addCarWorker(action) {
   try {
+    const carId = yield v4();
+
+    yield (action.payload['id'] = carId);
+
     yield put(addCarSuccess(action.payload));
+
+    yield put(push('/cars'))
   } catch (error) {
-    console.log(error)
+    console.log(error);
     // const errorMessage = yield error.toJSON().message;
     yield put(addCarFailure(error));
   }
@@ -64,4 +71,5 @@ export default function* watcher() {
   yield takeLatest(GET_CARS_REQUEST, getCarsWorker);
   yield takeLatest(ADD_CAR_REQUEST, addCarWorker);
   yield takeLatest(GET_MAKES_REQUEST, getMakesWorker);
+  
 }

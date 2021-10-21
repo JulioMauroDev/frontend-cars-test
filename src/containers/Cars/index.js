@@ -27,6 +27,14 @@ export const mapStateToProps = createStructuredSelector({
   cars: selectCars,
   addCarFormValues: (state) =>
     formValueSelector('ADD_CAR_FORM')(state, 'make', 'model', 'colour', 'year'),
+  editCarFormValues: (state) =>
+    formValueSelector('EDIT_CAR_FORM')(
+      state,
+      'make',
+      'model',
+      'colour',
+      'year'
+    ),
 });
 
 export const mapDispatchToProps = (dispatch) =>
