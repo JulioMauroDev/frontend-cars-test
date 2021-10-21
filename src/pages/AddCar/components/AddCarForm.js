@@ -24,7 +24,7 @@ const AddCarForm = (props) => {
     change('make', make);
   };
 
-  console.log(props);
+
   return (
     <AddCarFormWrapper onSubmit={handleSubmit}>
       <Field

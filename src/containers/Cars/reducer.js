@@ -20,7 +20,7 @@ const initialState = {
   loading: false,
   errorMessage: null,
   makes: null,
-  cars: null,
+  cars: [],
 };
 
 export default function reducer(state = initialState, action) {
@@ -76,6 +76,33 @@ export default function reducer(state = initialState, action) {
         loading: false,
         errorMessage: null,
         makes: action.payload,
+      };
+    }
+
+    // ---
+
+    case ADD_CAR_REQUEST: {
+      return {
+        ...state,
+        loading: true,
+        errorMessage: null,
+      };
+    }
+
+    case ADD_CAR_FAILURE: {
+      return {
+        ...state,
+        loading: false,
+        errorMessage: action.payload,
+      };
+    }
+
+    case ADD_CAR_SUCCESS: {
+      return {
+        ...state,
+        loading: false,
+        errorMessage: null,
+        cars: [...state.cars, action.payload],
       };
     }
 

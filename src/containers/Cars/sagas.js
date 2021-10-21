@@ -31,10 +31,11 @@ function* getCarsWorker(action) {
 
 function* addCarWorker(action) {
   try {
-    yield put(addCarSuccess());
+    yield put(addCarSuccess(action.payload));
   } catch (error) {
-    const errorMessage = yield error.toJSON().message;
-    yield put(addCarFailure(errorMessage));
+    console.log(error)
+    // const errorMessage = yield error.toJSON().message;
+    yield put(addCarFailure(error));
   }
 }
 

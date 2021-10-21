@@ -3,6 +3,7 @@ import { compose } from 'recompose';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import { formValueSelector } from 'redux-form';
+import { reduxForm } from 'redux-form';
 
 import {
   getCarsRequest,
