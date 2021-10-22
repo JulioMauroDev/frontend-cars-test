@@ -32,7 +32,7 @@ const CarPage = (props) => {
 export default compose(
   reduxForm({
     form: 'EDIT_CAR_FORM',
-    onSubmit: (cardId, values) => editCarRequest(cardId, values),
+    onSubmit: (carId, values) => editCarRequest(carId, values),
     submitAsSideEffect: true,
   }),
   CarsContainer

@@ -41,7 +41,9 @@ const EditCarForm = (props) => {
 
   const currentCarId = history.location.pathname.replace('/edit-car/', '');
 
-  const carDefaultValues = cars.filter((car) => car.id === currentCarId)[0];
+  // const carDefaultValues = cars.filter((car) => car.id === currentCarId)[0];
+
+  const carDefaultValues = cars[currentCarId];
 
   const handleEdit = (evt) => {
     evt.preventDefault();

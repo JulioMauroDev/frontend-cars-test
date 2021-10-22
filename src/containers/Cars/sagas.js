@@ -50,32 +50,11 @@ function* addCarWorker(action) {
 
 function* editCarWorker(action) {
   try {
-    const selectedCarId = action.payload.cardId;
+    yield (action.payload.values['id'] = action.payload.carId);
 
-    const carsSelector = yield select(selectCars);
+    yield put(editCarSuccess(action.payload));
 
-    const currentCarIndex = carsSelector
-      .map((car, index) => {
-        if (car.id === selectedCarId) {
-          return index;
-        }
-      })
-      .filter((x) => x !== undefined)[0];
-
-    let updatedCars = carsSelector;
-
-    yield (updatedCars[currentCarIndex] = action.payload.values);
-
-    console.log('currentCarIndex');
-    console.log(currentCarIndex);
-    // console.log('carsSelector')
-    // console.log(carsSelector)
-    // console.log('updatedCars')
-    // console.log(updatedCars)
-
-    // yield put(editCarSuccess(updatedCars));
-
-    // yield put(push('/cars'));
+    yield put(push('/cars'));
   } catch (error) {
     console.log(error);
     // const errorMessage = yield error.toJSON().message;

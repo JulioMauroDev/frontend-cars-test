@@ -20,7 +20,7 @@ const initialState = {
   loading: false,
   errorMessage: null,
   makes: null,
-  cars: [],
+  cars: {},
 };
 
 export default function reducer(state = initialState, action) {
@@ -102,7 +102,12 @@ export default function reducer(state = initialState, action) {
         ...state,
         loading: false,
         errorMessage: null,
-        cars: [...state.cars, action.payload],
+        cars: {
+          ...state.cars,
+          [action.payload.id]: {
+            ...action.payload,
+          },
+        },
       };
     }
 
@@ -129,7 +134,12 @@ export default function reducer(state = initialState, action) {
         ...state,
         loading: false,
         errorMessage: null,
-        cars: [...state.cars, action.payload],
+        cars: {
+          ...state.cars,
+          [action.payload.carId]: {
+            ...action.payload.values,
+          },
+        },
       };
     }
 

@@ -41,7 +41,9 @@ const TableBodyItem = styled.td`
   text-align: center;
 `;
 
-const TableBodyRow = ({ data, margin, itemId }) => {
+const TableBodyRow = (props) => {
+  const { data, margin, itemId } = props;
+
   const targetPath = `edit-car/${itemId}`;
 
   return (

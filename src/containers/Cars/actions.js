@@ -53,10 +53,10 @@ export const addCarSuccess = (newCar) => ({
 
 // --- EDIT CAR
 
-export const editCarRequest = (cardId, values) => ({
+export const editCarRequest = (carId, values) => ({
   type: EDIT_CAR_REQUEST,
   payload: {
-    cardId,
+    carId,
     values,
   },
 });
@@ -73,10 +73,10 @@ export const editCarSuccess = (updatedCar) => ({
 
 // --- DELETE CAR
 
-export const deleteCarRequest = (cardId) => ({
+export const deleteCarRequest = (carId) => ({
   type: DELETE_CAR_REQUEST,
   payload: {
-    cardId,
+    carId,
   },
 });
 

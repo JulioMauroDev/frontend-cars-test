@@ -23,7 +23,9 @@ const CarsPage = (props) => {
   return (
     <CarsPageWrapper>
       <PageHeader title="Cars" />
-      {cars && cars.length > 0 && <Table tableData={cars} />}
+      {cars && Object.values(cars).length > 0 && (
+        <Table tableData={Object.values(cars)} />
+      )}
 
       <RedirectButton
         title="Create a new car"
