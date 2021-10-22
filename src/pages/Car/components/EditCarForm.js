@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Field, change } from 'redux-form';
-import TextInput from 'components/TextInput';
+import TextInput from './TextInput';
 import Dropdown from 'components/Dropdown';
 
 const EditCarFormWrapper = styled.form`
@@ -41,6 +41,8 @@ const EditCarForm = (props) => {
 
   const currentCarId = history.location.pathname.replace('/edit-car/', '');
 
+  const currentCar = cars[currentCarId];
+
   // const carDefaultValues = cars.filter((car) => car.id === currentCarId)[0];
 
   const carDefaultValues = cars[currentCarId];
@@ -60,6 +62,7 @@ const EditCarForm = (props) => {
           placeholder: 'Car make...',
           withValidationIcon: true,
           values: makes,
+          initialValue: currentCar.make,
         }}
       />
       <Field
@@ -68,6 +71,7 @@ const EditCarForm = (props) => {
         props={{
           placeholder: carDefaultValues?.model,
           withValidationIcon: true,
+          initialValue: currentCar.model,
           // validation: modelValidation,
         }}
       />
@@ -77,6 +81,7 @@ const EditCarForm = (props) => {
         props={{
           placeholder: carDefaultValues?.colour,
           withValidationIcon: true,
+          initialValue: currentCar.colour,
           // validation: colourValidation,
         }}
       />
@@ -86,6 +91,7 @@ const EditCarForm = (props) => {
         props={{
           placeholder: carDefaultValues?.year,
           withValidationIcon: true,
+          initialValue: currentCar.year,
           // validation: yearValidation,
         }}
       />

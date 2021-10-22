@@ -8,7 +8,6 @@ import { reduxForm } from 'redux-form';
 import { editCarRequest } from 'containers/Cars/actions';
 import EditCarForm from './components/EditCarForm';
 
-
 const CarPageWrapper = styled.div`
   width: 95%;
   display: block;
@@ -34,6 +33,7 @@ export default compose(
     form: 'EDIT_CAR_FORM',
     onSubmit: (carId, values) => editCarRequest(carId, values),
     submitAsSideEffect: true,
+    enableReinitialize: true,
   }),
   CarsContainer
 )(CarPage);

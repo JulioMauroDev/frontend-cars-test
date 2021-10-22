@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { change, touch } from 'redux-form';
 
 const TextInputWrapper = styled.div``;
 
@@ -8,11 +9,10 @@ const TextInput = (field) => {
 
   const [value, setValue] = React.useState(field.initialValue);
 
-//   React.useEffect(()=>{
-// if(field.initialValue){
-
-// }
-//   },[])
+  // React.useEffect(() => {
+  //   change(input.name, value);
+  //   touch()
+  // }, []);
 
   return (
     <TextInputWrapper>
