@@ -22,6 +22,7 @@ const EditCarForm = (props) => {
     history,
     cars,
     editCarRequest,
+    deleteCarRequest
   } = props;
 
   const [isFormValid, setIsFormValid] = React.useState(false);
@@ -96,9 +97,8 @@ const EditCarForm = (props) => {
         }}
       />
 
-      <button disabled={!isFormValid} type="submit">
-        Update Car
-      </button>
+      <button type="submit">Update Car</button>
+      <button type="button" onClick={()=> deleteCarRequest(currentCarId)}>Delete Car</button>
     </EditCarFormWrapper>
   );
 };

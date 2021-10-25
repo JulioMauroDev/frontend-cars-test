@@ -8,6 +8,7 @@ const AppLayoutWrapper = styled.div`
   padding: 0;
   margin: 0;
   /* background-color: var(--clr-grey-bckgd); */
+  
 `;
 
 const AppWrapper = (props) => {

@@ -7,10 +7,10 @@ import PageHeader from 'parts/PageHeader';
 import Table from 'components/Table';
 
 const CarsPageWrapper = styled.div`
-  width: 95%;
+  width: 90%;
   display: block;
   margin: 0 auto;
-  margin-top: 25px;
+  padding-top: 50px;
 `;
 
 const CarsPage = (props) => {

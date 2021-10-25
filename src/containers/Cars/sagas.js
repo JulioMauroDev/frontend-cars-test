@@ -83,9 +83,21 @@ function* getMakesWorker(action) {
   }
 }
 
+function* deleteCarWorker(action) {
+  try {
+    yield put(deleteCarSuccess(action.payload));
+
+    yield put(push('/cars'));
+  } catch (error) {
+    const errorMessage = yield error.toJSON().message;
+    yield put(deleteCarFailure(errorMessage));
+  }
+}
+
 export default function* watcher() {
   yield takeLatest(GET_CARS_REQUEST, getCarsWorker);
   yield takeLatest(ADD_CAR_REQUEST, addCarWorker);
   yield takeLatest(GET_MAKES_REQUEST, getMakesWorker);
   yield takeLatest(EDIT_CAR_REQUEST, editCarWorker);
+  yield takeLatest(DELETE_CAR_REQUEST, deleteCarWorker);
 }

@@ -143,6 +143,37 @@ export default function reducer(state = initialState, action) {
       };
     }
 
+    // ---
+
+    case DELETE_CAR_REQUEST: {
+      return {
+        ...state,
+        loading: true,
+        errorMessage: null,
+      };
+    }
+
+    case DELETE_CAR_FAILURE: {
+      return {
+        ...state,
+        loading: false,
+        errorMessage: action.payload,
+      };
+    }
+
+    case DELETE_CAR_SUCCESS: {
+      const { [action.payload.carId]: id, ...otherCars } = state.cars;
+
+      return {
+        ...state,
+        loading: false,
+        errorMessage: null,
+        cars: {
+          ...otherCars,
+        },
+      };
+    }
+
     default:
       return state;
   }

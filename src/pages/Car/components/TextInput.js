@@ -1,18 +1,22 @@
 import React from 'react';
 import styled from 'styled-components';
 import { change, touch } from 'redux-form';
+import { useDispatch } from 'react-redux';
 
 const TextInputWrapper = styled.div``;
 
 const TextInput = (field) => {
-  const { input, placeholder } = field;
+  const { input, placeholder, initialValue } = field;
 
   const [value, setValue] = React.useState(field.initialValue);
 
-  // React.useEffect(() => {
-  //   change(input.name, value);
-  //   touch()
-  // }, []);
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    if (initialValue) {
+      dispatch(change('EDIT_CAR_FORM', input.name, initialValue));
+    }
+  }, [initialValue, input?.name, dispatch]);
 
   return (
     <TextInputWrapper>

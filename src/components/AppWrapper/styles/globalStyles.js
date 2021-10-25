@@ -51,8 +51,10 @@ body {
     padding:0;
     font-family:'CircularStdBook';
     color: var(--clr-grey-bckgd);
-    background: #673ab7;
-  background: linear-gradient(to right, #512da8, #673ab7);
+  background:url(https://car-images.bauersecure.com/pagefiles/87858/19-mercedes-eqc-01.jpg);
+  background-size:cover;
+  box-shadow:inset 0 0 0 600px rgba(40, 22, 70, 0.75);
+  /* mix-blend-mode: lighten; */
   }
   .page{
     margin-top:100px;

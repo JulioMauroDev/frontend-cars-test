@@ -14,7 +14,7 @@ const AddCarPageWrapper = styled.div`
   width: 95%;
   display: block;
   margin: 0 auto;
-  margin-top: 25px;
+  padding-top: 50px;
 `;
 
 const AddCarPage = (props) => {
